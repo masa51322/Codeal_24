@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"Detail View";
+    self.navigationItem.title = @"Detail   View";
     self.imageView.image = self.image;
     NSLog(@"name:%@",self.name);
     self.nameView.text = self.name;
