@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C3194C0B-1E67-4DC8-813F-E862A7931D91</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TwitterClient01</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>88041318-0AEF-4342-9E78-6D5BDD0B0BFF</key>
+		<string>https://github.com/masa51322/Codeal_24.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TwitterClient01/TwitterClient01.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>88041318-0AEF-4342-9E78-6D5BDD0B0BFF</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/masa51322/Codeal_24.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>88041318-0AEF-4342-9E78-6D5BDD0B0BFF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>88041318-0AEF-4342-9E78-6D5BDD0B0BFF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Codeal2014.4</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -13,6 +13,7 @@
 #import "DetailViewController.h"
 
 @interface TimeLineTableViewController : UITableViewController
+
 @property NSString *identifier;
 
 @end

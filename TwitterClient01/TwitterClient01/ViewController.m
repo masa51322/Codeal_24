@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *tweetActionButton;
 @property (weak, nonatomic) IBOutlet UILabel *accountDisplayLabel;
 
+
 @property ACAccountStore *accountStore;//ゲッター、セッターができている。
 @property NSString *identifier;
 @property NSArray *twitterAccounts; //accountDisplayLabelはストーリーボード
@@ -25,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
 	// Do any additional setup after loading the view, typically from a nib.
     self.accountStore = [[ACAccountStore alloc] init];
     ACAccountType *twitterType =
@@ -35,11 +38,13 @@
                                                 
                                                 if(granted){ //認証されたら！
                                                     self.twitterAccounts = [self.accountStore accountsWithAccountType:twitterType];//
+                                                    NSLog(@"あいい:%@",self.twitterAccounts);
                                                     
                                                     if (self.twitterAccounts.count > 0) {
                                                         
                                                         ACAccount *account = self.twitterAccounts[0];
                                                         self.identifier = account.identifier;//個人ID
+                                                        NSLog(@"へいい:%@",self.identifier);
                                                         dispatch_async(dispatch_get_main_queue(), ^{ //User interface の処理
                                                             self.accountDisplayLabel.text = account.username; //Twitter name
                                                         });
@@ -129,8 +134,21 @@
             timeLineTableViewController.identifier = self.identifier;//情報を受け渡す。
         }
         
+    }else if([[segue identifier] isEqualToString:@"TweetSheetSegue"]){
+        TweetSheetViewController *tweetSheetViewController =
+        [segue destinationViewController];
+        if ([tweetSheetViewController isKindOfClass:[TweetSheetViewController class]]){
+            tweetSheetViewController.identifier = self.identifier;//情報を受け渡す。
+            NSLog(@"セグエ");
+        }
+    }else if ([[segue identifier] isEqualToString:@"FavoriteTimeLineSegue"]){
+        FavoriteTableViewController *favoriteTableViewController =
+        [segue destinationViewController];
+        if([favoriteTableViewController isKindOfClass:[FavoriteTableViewController class]]){
+            favoriteTableViewController.identifier = self.identifier;
+            NSLog(@"お気に入り");
+        }
     }
-    
 }
 
 //アカウントは、配列で保存されている。

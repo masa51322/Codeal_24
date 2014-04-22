@@ -10,6 +10,12 @@
 		BF0C687319021D5400049EF4 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0C687219021D5400049EF4 /* DetailViewController.m */; };
 		BF0C68761902478700049EF4 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0C68751902478700049EF4 /* WebViewController.m */; };
 		BF0C687919024C8D00049EF4 /* MyUIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0C687819024C8D00049EF4 /* MyUIApplication.m */; };
+		BF0C687C1903EB8400049EF4 /* TweetSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0C687B1903EB8400049EF4 /* TweetSheetViewController.m */; };
+		BFA563EE1904390B006B8179 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA563ED1904390B006B8179 /* FavoriteTableViewController.m */; };
+		BFA563F119043924006B8179 /* FavoriteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA563F019043924006B8179 /* FavoriteTableViewCell.m */; };
+		BFA56435190450C0006B8179 /* FavoriteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFA56434190450C0006B8179 /* FavoriteDetailViewController.m */; };
+		BFAB438C19045D4A00F732B8 /* FavoriteWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAB438B19045D4A00F732B8 /* FavoriteWebViewController.m */; };
+		BFAB438F1904602E00F732B8 /* MyUIFavApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = BFAB438E1904602E00F732B8 /* MyUIFavApplication.m */; };
 		BFFB10C618F8F61700E8636E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFFB10C518F8F61700E8636E /* Foundation.framework */; };
 		BFFB10C818F8F61700E8636E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFFB10C718F8F61700E8636E /* CoreGraphics.framework */; };
 		BFFB10CA18F8F61700E8636E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFFB10C918F8F61700E8636E /* UIKit.framework */; };
@@ -45,6 +51,18 @@
 		BF0C68751902478700049EF4 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BF0C687719024C8D00049EF4 /* MyUIApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUIApplication.h; sourceTree = "<group>"; };
 		BF0C687819024C8D00049EF4 /* MyUIApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUIApplication.m; sourceTree = "<group>"; };
+		BF0C687A1903EB8400049EF4 /* TweetSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSheetViewController.h; sourceTree = "<group>"; };
+		BF0C687B1903EB8400049EF4 /* TweetSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSheetViewController.m; sourceTree = "<group>"; };
+		BFA563EC1904390B006B8179 /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
+		BFA563ED1904390B006B8179 /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
+		BFA563EF19043924006B8179 /* FavoriteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewCell.h; sourceTree = "<group>"; };
+		BFA563F019043924006B8179 /* FavoriteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewCell.m; sourceTree = "<group>"; };
+		BFA56433190450C0006B8179 /* FavoriteDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteDetailViewController.h; sourceTree = "<group>"; };
+		BFA56434190450C0006B8179 /* FavoriteDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteDetailViewController.m; sourceTree = "<group>"; };
+		BFAB438A19045D4A00F732B8 /* FavoriteWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteWebViewController.h; sourceTree = "<group>"; };
+		BFAB438B19045D4A00F732B8 /* FavoriteWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteWebViewController.m; sourceTree = "<group>"; };
+		BFAB438D1904602E00F732B8 /* MyUIFavApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUIFavApplication.h; sourceTree = "<group>"; };
+		BFAB438E1904602E00F732B8 /* MyUIFavApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUIFavApplication.m; sourceTree = "<group>"; };
 		BFFB10C218F8F61700E8636E /* TwitterClient01.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient01.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFFB10C518F8F61700E8636E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BFFB10C718F8F61700E8636E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +162,18 @@
 				BF0C68751902478700049EF4 /* WebViewController.m */,
 				BF0C687719024C8D00049EF4 /* MyUIApplication.h */,
 				BF0C687819024C8D00049EF4 /* MyUIApplication.m */,
+				BF0C687A1903EB8400049EF4 /* TweetSheetViewController.h */,
+				BF0C687B1903EB8400049EF4 /* TweetSheetViewController.m */,
+				BFA563EC1904390B006B8179 /* FavoriteTableViewController.h */,
+				BFA563ED1904390B006B8179 /* FavoriteTableViewController.m */,
+				BFA563EF19043924006B8179 /* FavoriteTableViewCell.h */,
+				BFA563F019043924006B8179 /* FavoriteTableViewCell.m */,
+				BFA56433190450C0006B8179 /* FavoriteDetailViewController.h */,
+				BFA56434190450C0006B8179 /* FavoriteDetailViewController.m */,
+				BFAB438A19045D4A00F732B8 /* FavoriteWebViewController.h */,
+				BFAB438B19045D4A00F732B8 /* FavoriteWebViewController.m */,
+				BFAB438D1904602E00F732B8 /* MyUIFavApplication.h */,
+				BFAB438E1904602E00F732B8 /* MyUIFavApplication.m */,
 			);
 			path = TwitterClient01;
 			sourceTree = "<group>";
@@ -277,8 +307,14 @@
 				BFFB10FF18F91A9600E8636E /* TimeLineCell.m in Sources */,
 				BF0C68761902478700049EF4 /* WebViewController.m in Sources */,
 				BFFB10DC18F8F61700E8636E /* ViewController.m in Sources */,
+				BFA563F119043924006B8179 /* FavoriteTableViewCell.m in Sources */,
 				BFFB10D618F8F61700E8636E /* AppDelegate.m in Sources */,
 				BF0C687919024C8D00049EF4 /* MyUIApplication.m in Sources */,
+				BFA563EE1904390B006B8179 /* FavoriteTableViewController.m in Sources */,
+				BFAB438C19045D4A00F732B8 /* FavoriteWebViewController.m in Sources */,
+				BFA56435190450C0006B8179 /* FavoriteDetailViewController.m in Sources */,
+				BF0C687C1903EB8400049EF4 /* TweetSheetViewController.m in Sources */,
+				BFAB438F1904602E00F732B8 /* MyUIFavApplication.m in Sources */,
 				BFFB10FC18F9131000E8636E /* TimeLineTableViewController.m in Sources */,
 				BFFB10D218F8F61700E8636E /* main.m in Sources */,
 				BF0C687319021D5400049EF4 /* DetailViewController.m in Sources */,

@@ -10,6 +10,8 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "TimeLineTableViewController.h"
+#import "TweetSheetViewController.h"
+#import "FavoriteTableViewController.h"
 
 @interface ViewController : UIViewController <UIActionSheetDelegate>
 

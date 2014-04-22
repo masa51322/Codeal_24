@@ -1,27 +1,27 @@
 //
-//  TimeLineTableViewController.m
+//  FavoriteTableViewController.m
 //  TwitterClient01
 //
-//  Created by Masaru Kurashima on 4/12/14.
+//  Created by Masaru Kurashima on 4/21/14.
 //  Copyright (c) 2014 masa.com. All rights reserved.
 //
 
-#import "TimeLineTableViewController.h"
+#import "FavoriteTableViewController.h"
 
-@interface TimeLineTableViewController ()
+@interface FavoriteTableViewController ()
 
 @property dispatch_queue_t mainQueue;
 @property dispatch_queue_t imageQueue;
 @property NSString *httpErrorMessege;
 @property NSArray *timeLineData;
-@property (nonatomic) UIRefreshControl *refreshControl;
 
 @property CGFloat paddingTop;
 @property CGFloat paddingDown;
 
+
 @end
 
-@implementation TimeLineTableViewController
+@implementation FavoriteTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,43 +37,41 @@
     [super viewDidLoad];
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"Tweet"
-                                                             style:UIBarButtonItemStyleBordered
-                                                            target:self
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self
                                                              action:@selector(tweetAction:)]; //あとで、ツイート画面に変更
     self.navigationItem.rightBarButtonItem =right;
-    
-    
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self
-                       action:@selector(refresh:)
-             forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControl;
-    
-    [self.tableView registerClass:[TimeLineCell class] forCellReuseIdentifier:@"TimeLineCell"]
-    ;    self.mainQueue = dispatch_get_main_queue();
-    self.imageQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);
-    
-    ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-    ACAccount *account = [accountStore accountWithIdentifier:self.identifier];
 
     
-    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
-                  @"/1.1/statuses/home_timeline.json"];
-    NSDictionary *params = @{@"count" : @"100",
-                             @"trim_user" : @"0",
-                             @"include_entities" : @"0"};
-    SLRequest *request =[SLRequest requestForServiceType:SLServiceTypeTwitter
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView registerClass:[FavoriteTableViewCell class] forCellReuseIdentifier:@"FavoriteTableViewCell"];
+    self.mainQueue = dispatch_get_main_queue();
+    self.imageQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);
+    
+    ACAccountStore *accountStore = [[ACAccountStore alloc]init];
+    ACAccount *account = [accountStore accountWithIdentifier:self.identifier];
+    
+    NSURL *url =[NSURL URLWithString:@"https://api.twitter.com/1.1/favorites/list.json"];
+    NSDictionary *param = @{@"count" :@"100",
+                            @"trim_user":@"0",
+                            @"include_entitues":@"0"};
+    SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                             requestMethod:SLRequestMethodGET
                                                       URL:url
-                                               parameters:params];
+                                               parameters:param];
     [request setAccount:account];
     
-    UIApplication *application =[UIApplication sharedApplication];//共通で使える
+    
+    
+    UIApplication *application =[UIApplication sharedApplication];
     application.networkActivityIndicatorVisible = YES;
     
     [request performRequestWithHandler:^(NSData *responseData,
-                                    NSHTTPURLResponse *urlResponse,
+                                         NSHTTPURLResponse *urlResponse,
                                          NSError *error){
         
         if(responseData){
@@ -85,35 +83,34 @@
                                                 options:NSJSONReadingAllowFragments
                                                   error:&jsonError];
                 if(self.timeLineData){
-                    //NSLog(@"Timeline Response: %@\n", self.timeLineData);
+                    NSLog(@"FavoriteTimeline Response: %@\n", self.timeLineData);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        //NSLog(@"pass");
+                        NSLog(@"Favoritepass");
                         [self.tableView reloadData];
                     });
-                                   }
-                                   else{
-                                       NSLog(@"JSON Error : %@",[jsonError localizedDescription]);
-                                       }
-                                   }
-                                   else{
-                                       self.httpErrorMessege =
-                                       [NSString stringWithFormat:@"The response status code is %d",
-                                        urlResponse.statusCode];
-                                       NSLog(@"HTTP Error: %@" ,self.httpErrorMessege);
-                                   }
-                                   
-                                }
+                }
+                else{
+                    NSLog(@"FavoriteJSON Error : %@",[jsonError localizedDescription]);
+                }
+            }
+            else{
+                self.httpErrorMessege =
+                [NSString stringWithFormat:@"The response status code is %d",
+                 urlResponse.statusCode];
+                NSLog(@"Favorite:HTTP Error: %@" ,self.httpErrorMessege);
+            }
+            
+        }
         dispatch_async(self.mainQueue,^{ //重たい処理と同時にできる。
-                        UIApplication *application = [UIApplication sharedApplication];//visible indicatar
-                        application.networkActivityIndicatorVisible = NO;
-                    });
+            UIApplication *application = [UIApplication sharedApplication];//visible indicatar
+            application.networkActivityIndicatorVisible = NO;
+        });
     }];
+
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -135,39 +132,36 @@
 
     // Return the number of rows in the section.
     if(!self.timeLineData){
-    return 1;
+        return 1;
     }else{
-        return [self.timeLineData count];
+        
+    return [self.timeLineData count];
     }
+
 }
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TimeLineCell"
-                                                         forIndexPath:indexPath];
-    
+    FavoriteTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"FavoriteTableViewCell" forIndexPath:indexPath];
     // Configure the cell...
-
+    
     if (self.httpErrorMessege) { //並列処理ならではの書き方。
-        cell.tweeTextLabel.text = self.httpErrorMessege;
-        cell.tweetTextLabelHeight =  24;
+        cell.favoriteTextLabel.text = self.httpErrorMessege;
+        cell.favoriteTextLabelHeight =  24;
     }else if (!self.timeLineData){
-        cell.tweeTextLabel.text = @"Loading...";
-        cell.tweetTextLabelHeight =  24;
+        cell.favoriteTextLabel.text = @"Loading...";
+        cell.favoriteTextLabelHeight =  24;
     }else{
         NSString *name = self.timeLineData[indexPath.row][@"user"][@"screen_name"];
         
-        //NSLog(@"エラー1 %@",name);
+        NSLog(@"favoriteエラー1 %@",name);
         NSString *text = self.timeLineData[indexPath.row][@"text"];
-        //NSString *friends = self.timeLineData[indexPath.row][@"user"][@"friends_count"];
-        //NSString *followers = self.timeLineData[indexPath.row][@"user"][@"followers_count"];
-        //NSLog(@"今回　フォロワー:%@　友達:%@",friends,followers);
-
+        
         //NSString *name = self.timeLineData[indexPath.row][@"user"][@"screen_name"];
         
-    
         //カスタム競るを使わない場合は以下の２行
         //cell.textLabel.font =[UIFont systemFontOfSize:14];
         //cell.textLabel.numberOfLines =0;
@@ -175,14 +169,14 @@
                             constrainedToSize:CGSizeMake(300,10000)
                                 lineBreakMode:NSLineBreakByCharWrapping];
         
-        cell.tweetTextLabelHeight = labelSize.height;
-        cell.tweeTextLabel.text = text;
+        cell.favoriteTextLabelHeight = labelSize.height;
+        cell.favoriteTextLabel.text = text;
         
         //カスタム競るを使わない場合は以下の２行
         //cell.textLabel.font =[UIFont systemFontOfSize:12];
         //cell.textLabel.numberOfLines = name;
-    
-        //NSLog(@"エラー2 %@",name);
+        
+        NSLog(@"favoriteエラー2 %@",name);
         cell.nameLabel.text = name;
         cell.profileImageView.image =[UIImage imageNamed:@"blank.png"];
         
@@ -195,7 +189,7 @@
             
             if([[tweetDictionary allKeys] containsObject:@"retweeted_status"]) {
                 //リツイートの場合はretweeted_statusキー項目が存在する。
-            
+                
                 url = [[[tweetDictionary objectForKey:@"retweeted_status"]
                         objectForKey:@"user"]
                        objectForKey:@"profile_image_url"];
@@ -215,10 +209,9 @@
         });
     }
     
-        return cell;
+    return cell;
     
 }
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *content =
@@ -230,78 +223,9 @@
     
 }
 
--(void)refresh:(UIRefreshControl*)control
-     {
-         [self.refreshControl beginRefreshing];//処理開始
-         //処理を書き込む
-         
-         [self.tableView registerClass:[TimeLineCell class] forCellReuseIdentifier:@"TimeLineCell"]
-         ;    self.mainQueue = dispatch_get_main_queue();
-         self.imageQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);
-         
-         ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-         ACAccount *account = [accountStore accountWithIdentifier:self.identifier];
-         //NSLog(@"Timeあいで = %@", self.identifier);
-         
-         NSURL *url = [NSURL URLWithString:@"https://api.twitter.com"
-                       @"/1.1/statuses/home_timeline.json"];
-         NSDictionary *params = @{@"count" : @"100",
-                                  @"trim_user" : @"0",
-                                  @"include_entities" : @"0"};
-         SLRequest *request =[SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                requestMethod:SLRequestMethodGET
-                                                          URL:url
-                                                   parameters:params];
-         [request setAccount:account];
-         
-         UIApplication *application =[UIApplication sharedApplication];//共通で使える
-         application.networkActivityIndicatorVisible = YES;
-         
-         [request performRequestWithHandler:^(NSData *responseData,
-                                              NSHTTPURLResponse *urlResponse,
-                                              NSError *error){
-             
-             if(responseData){
-                 self.httpErrorMessege =nil;
-                 if(urlResponse.statusCode >= 200 && urlResponse.statusCode < 300){
-                     NSError *jsonError;
-                     self.timeLineData =
-                     [NSJSONSerialization JSONObjectWithData:responseData
-                                                     options:NSJSONReadingAllowFragments
-                                                       error:&jsonError];
-                     if(self.timeLineData){
-                         NSLog(@"Timeline Response: %@\n", self.timeLineData);
-                         dispatch_async(dispatch_get_main_queue(), ^{
-                             //NSLog(@"pass");
-                             [self.tableView reloadData];
-                         });
-                     }
-                     else{
-                         NSLog(@"JSON Error : %@",[jsonError localizedDescription]);
-                     }
-                 }
-                 else{
-                     self.httpErrorMessege =
-                     [NSString stringWithFormat:@"The response status code is %d",
-                      urlResponse.statusCode];
-                    // NSLog(@"HTTP Error: %@" ,self.httpErrorMessege);
-                 }
-                 
-             }
-             dispatch_async(self.mainQueue,^{ //重たい処理と同時にできる。
-                 UIApplication *application = [UIApplication sharedApplication];//visible indicatar
-                 application.networkActivityIndicatorVisible = NO;
-             });
-         }];
-         
-         NSLog(@"更新されています。");
-
-         
-         [self.refreshControl endRefreshing];//処理終了
-     }
 
 
-    /*
+/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -350,11 +274,10 @@
 }
 */
 
-//didselectrowatlindexpath
-
+/*
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath //値の引き継ぎ
 {
-    TimeLineCell *cell = (TimeLineCell *)[tableView cellForRowAtIndexPath:indexPath]; //clickした場所のindexPath
+    FavoriteTableViewCell *cell = (FavoriteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]; //clickした場所のindexPath
     
     DetailViewController *detailViewController = [self.storyboard
                                                   instantiateViewControllerWithIdentifier:@"DetailViewController"];//staryboardIDを書く。
@@ -364,15 +287,30 @@
     detailViewController.image = cell.profileImageView.image;
     detailViewController.identifier = self.identifier;
     detailViewController.idStr = self.timeLineData[indexPath.row][@"id_str"];
-    detailViewController.followers = self.timeLineData[indexPath.row][@"user"][@"followers_count"];
-    detailViewController.friends = self.timeLineData[indexPath.row][@"user"][@"friends_count"];
-
-
-    //NSLog(@"ここ%@",detailViewController.idStr);
+    NSLog(@"ここ%@",detailViewController.idStr);
     
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
+ */
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath //値の引き継ぎ
+{
+    FavoriteTableViewCell *cell = (FavoriteTableViewCell *)[tableView cellForRowAtIndexPath:indexPath]; //clickした場所のindexPath
+    NSLog(@"passhere");
+    FavoriteDetailViewController *favoriteDetailViewController = [self.storyboard
+                                                  instantiateViewControllerWithIdentifier:@"FavoriteDetailViewController"];
+    
+    favoriteDetailViewController.name = cell.nameLabel.text;
+    favoriteDetailViewController.text = cell.favoriteTextLabel.text;
+    favoriteDetailViewController.image = cell.profileImageView.image;
+    favoriteDetailViewController.identifier = self.identifier;
+    favoriteDetailViewController.idStr = self.timeLineData[indexPath.row][@"id_str"];
+    favoriteDetailViewController.followers = self.timeLineData[indexPath.row][@"user"][@"followers_count"];
+    favoriteDetailViewController.friends = self.timeLineData[indexPath.row][@"user"][@"friends_count"];
+    NSLog(@"facoriteここ%@",favoriteDetailViewController.idStr);
+    
+    [self.navigationController pushViewController:favoriteDetailViewController animated:YES];
+}
 
 - (IBAction)tweetAction:(id)sender {//Tweet処理
     
@@ -390,7 +328,6 @@
         [self presentViewController:composeCtl animated:YES completion:NULL];
     }
 }
-
 
 
 
